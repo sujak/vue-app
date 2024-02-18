@@ -1,20 +1,10 @@
-<script setup>
-import { ref } from 'vue'
-
-defineProps({
-  msg: String,
-})
-
-const count = ref(0)
-</script>
-
 <template>
   <h1>{{ msg }}</h1>
 
   <div class="card">
-    <button type="button" @click="count++">count is {{ count }}</button>
+    <button type="button" @click="increment">count is {{ getCount }}</button>
     <p>
-      Edit
+      <span class="w-16">Edit</span>
       <code>components/HelloWorld.vue</code> to test HMR
     </p>
   </div>
@@ -32,6 +22,30 @@ const count = ref(0)
   </p>
   <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
 </template>
+
+<script setup>
+import { onMounted } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useCounterStore } from '@/stores/counter';
+import { useLoadingStore } from '@/stores/loading';
+
+
+const counterStore = useCounterStore();
+const { getCount } = storeToRefs(counterStore);
+const { increment } = counterStore;
+
+const loadingStore = useLoadingStore();
+const { hideLoading } = loadingStore;
+
+defineProps({
+  msg: String,
+})
+
+onMounted(() => {
+  hideLoading();
+});
+</script>
+
 
 <style lang="scss" scoped>
 .read-the-docs {

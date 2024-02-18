@@ -1,5 +1,9 @@
 <template>
   <div>
+    <!--
+      getLoading
+      -->
+    <p>getLoading: {{ getLoading}}</p>
     <nav>
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
@@ -8,6 +12,16 @@
     <router-view />
   </div>
 </template>
+
+<script setup>
+import { useLoadingStore } from '@/stores/loading';
+import { storeToRefs } from 'pinia';
+
+
+const store = useLoadingStore();
+const { getLoading } = storeToRefs(store);
+
+</script>
 
 <style lang="scss" scoped>
 
