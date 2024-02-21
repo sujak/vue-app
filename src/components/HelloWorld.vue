@@ -11,9 +11,7 @@
 
   <p>
     Check out
-    <a href="https://vuejs.org/guide/quick-start.html#local" target="_blank"
-      >create-vue</a
-    >, the official Vue + Vite starter
+    <a href="https://vuejs.org/guide/quick-start.html#local" target="_blank">create-vue</a>, the official Vue + Vite starter
   </p>
   <p>
     Install
@@ -24,36 +22,17 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useCounterStore } from '@/stores/counter';
-import { useLoadingStore } from '@/stores/loading';
-
 
 const counterStore = useCounterStore();
 const { getCount } = storeToRefs(counterStore);
 const { increment } = counterStore;
 
-const loadingStore = useLoadingStore();
-const { hideLoading } = loadingStore;
-
 defineProps({
-  msg: String,
-})
-
-onMounted(() => {
-  hideLoading();
+  msg: String
 });
+// onMounted(() => {});
 </script>
 
-
-<style lang="scss" scoped>
-.read-the-docs {
-  color: #888;
-}
-h1 {
-  border: 1px solid blue;
-  color: $color-text-red;
-}
-
-</style>
+<style lang="scss" scoped></style>

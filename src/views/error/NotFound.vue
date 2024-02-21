@@ -1,107 +1,23 @@
 <template>
-  <div id="notfound">
-    <div class="notfound">
-      <div class="notfound-404">
-        <h1>404</h1>
-      </div>
-      <h2>We are sorry, Page not found!</h2>
-      <p>The page you are looking for might have been removed had its name changed or is temporarily unavailable.</p>
-      <router-link to="/" class="link">Back To Homepage</router-link>
+  <div class="bg-gray-200 w-full px-16 md:px-0 h-screen flex items-center justify-center">
+    <div class="bg-white border border-gray-200 flex flex-col items-center justify-center px-4 md:px-8 lg:px-24 py-8 rounded-lg shadow-2xl">
+      <p class="text-6xl md:text-7xl lg:text-9xl font-bold tracking-wider text-gray-300">404</p>
+      <p class="text-2xl md:text-3xl lg:text-5xl font-bold tracking-wider text-gray-500 mt-4">Page Not Found</p>
+      <p class="text-gray-500 mt-4 pb-4 border-b-2 text-center">Sorry, the page you are looking for could not be found.</p>
+      <!-- router-link를 사용하지 않고 홈으로 이동함 -->
+      <a href="/" class="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 mt-6 rounded transition duration-150" title="Return Home">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd"></path>
+        </svg>
+        <span>Return Home</span>
+      </a>
     </div>
   </div>
 </template>
 
-<style lang="scss" scoped>
-#notfound {
-  position: relative;
-  height: 100vh;
-  .notfound {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
-}
+<script setup></script>
 
-.notfound {
-  max-width: 920px;
-  width: 100%;
-  line-height: 1.4;
-  text-align: center;
-  padding-left: 15px;
-  padding-right: 15px;
-  .notfound-404 {
-    position: absolute;
-    height: 100px;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: -1;
-    h1 {
-      font-family: maven pro, sans-serif;
-      color: #ececec;
-      font-weight: 900;
-      font-size: 276px;
-      margin: 0;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      -webkit-transform: translate(-50%, -50%);
-      -ms-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
-      @media only screen and (max-width: 480px) {
-        font-size: 162px;
-      }
-    }
-    h2 {
-      font-family: maven pro, sans-serif;
-      font-size: 46px;
-      color: #000;
-      font-weight: 900;
-      text-transform: uppercase;
-      margin: 0;
-      @media only screen and (max-width: 480px) {
-        font-size: 26px;
-      }
-    }
-    p {
-      font-family: maven pro, sans-serif;
-      font-size: 16px;
-      color: #000;
-      font-weight: 400;
-      text-transform: uppercase;
-      margin-top: 15px;
-    }
-  }
-  a {
-    font-family: maven pro, sans-serif;
-    font-size: 14px;
-    text-decoration: none;
-    text-transform: uppercase;
-    background: #189cf0;
-    display: inline-block;
-    padding: 16px 38px;
-    border: 2px solid transparent;
-    border-radius: 40px;
-    color: #fff;
-    font-weight: 400;
-    -webkit-transition: 0.2s all;
-    transition: 0.2s all;
-    &:hover {
-      background-color: #fff;
-      border-color: #189cf0;
-      color: #189cf0;
-    }
-  }
-}
-// @media only screen and (max-width: 480px) {
-//   .notfound .notfound-404 h1 {
-//     font-size: 162px;
-//   }
-//   .notfound h2 {
-//     font-size: 26px;
-//   }
-// }
+<style lang="scss" scoped>
 </style>
 
-<script setup></script>
+
