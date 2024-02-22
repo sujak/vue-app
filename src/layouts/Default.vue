@@ -37,6 +37,19 @@
         </div>
       </div>
     </nav>
+
+    <div style="border: 1px solid red; min-height: 50px">
+      {{ user }}
+      <div v-if="user.loggedIn">
+        Welcome, {{user.data.displayName}}
+        <button @click.prevent="signOut" class="btn btn-primary">로그아웃</button>
+      </div>
+      <div v-else>
+        <router-link to="/login">
+          <span>로그인해 주세요.</span>
+        </router-link>
+      </div>
+    </div>
     <slot />
   </div>
 </template>
@@ -44,7 +57,16 @@
 <script setup>
 import { storeToRefs } from 'pinia';
 import { useAppStore } from '@/stores/app';
+import { auth } from '@/firebase.config.js';
 const appStore = useAppStore();
-const { showMenu, getNavbar } = storeToRefs(appStore);
-const { toggleNavbar } = appStore;
+const { showMenu, user } = storeToRefs(appStore);
+const { toggleNavbar, logOut, fetchUser } = appStore;
+
+auth.onAuthStateChanged(user => {
+  fetchUser(user);
+});
+const signOut = async () => {
+  logOut();
+  // router.push('/')
+};
 </script>
