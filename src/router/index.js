@@ -1,4 +1,5 @@
 import { createWebHistory, createRouter } from 'vue-router';
+import { useAppStore } from '@/stores/app';
 
 // Layout
 import DefaultLayout from '@/layouts/Default.vue';
@@ -60,7 +61,14 @@ const router = createRouter({
 });
 
 // Navigation guards
-// router.beforeEach((to, from, next) => {});
+router.beforeEach((to, from, next) => {
+  const appStore = useAppStore();
+  const { hideNavbar } = appStore;
+  // 이동시 네비게이션 숨기기
+  hideNavbar();
+
+  next();
+});
 // router.beforeResolve(async to => {})
 // router.afterEach((to, from, failure) => {});
 

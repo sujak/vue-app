@@ -2,12 +2,11 @@ import { ref } from 'vue';
 import { defineStore } from 'pinia';
 
 export const useTodoListStore = defineStore('todoList', () => {
-  // State(ref, reactive)
+  // State
   const todoList = ref([]);
 
-  // Getter(computed)
-
-  // Actions(function)
+  // Getter
+  // Actions
   const addTodo = (item) => {
     todoList.value.push({
       id: crypto.randomUUID(),
@@ -17,7 +16,7 @@ export const useTodoListStore = defineStore('todoList', () => {
   };
 
   const deleteTodo = (itemId) => {
-    todoList.value = todoList.value.filter(todo => todo.id !== itemId);
+    todoList.value = todoList.value.filter((todo) => todo.id !== itemId);
   };
 
   return {
@@ -26,27 +25,3 @@ export const useTodoListStore = defineStore('todoList', () => {
     deleteTodo
   };
 });
-
-// import { defineStore } from 'pinia';
-
-// export const useTodoListStore = defineStore('todoList', {
-//   // State
-//   state: () => ({
-//     todoList: []
-//   }),
-
-//   // getter
-//   // actions
-//   actions: {
-//     addTodo(item) {
-//       this.todoList.push({
-//         id: crypto.randomUUID(),
-//         completed: false,
-//         ...item
-//       });
-//     },
-//     deleteTodo(itemId) {
-//       this.todoList = this.todoList.filter((todo) => todo.id !== itemId);
-//     },
-//   }
-// });
