@@ -7,6 +7,7 @@ import DefaultLayout from '@/layouts/Default.vue';
 // Component
 import Home from '@/views/Home.vue';
 import NotFound from '@/views/error/NotFound.vue';
+import Login from '@/views/auth/Login.vue';
 
 const routes = [
   {
@@ -42,6 +43,11 @@ const routes = [
         component: () => import('@/views/demo/Calendar.vue')
       }
     ]
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
   },
   {
     path: '/notFound',

@@ -28,11 +28,25 @@
                 <span>Demo</span>
               </router-link>
             </li>
-            <li class="nav-item">
-              <router-link to="/notFound" class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75">
-                <span>404</span>
-              </router-link>
-            </li>
+            <template v-if="user.loggedIn">
+              <li class="nav-item">
+                <router-link to="/profile" class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75">
+                  <span>Profile (Error)</span>
+                </router-link>
+              </li>
+              <li class="nav-item">
+                <span class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75">
+                  <span @click.prevent="signOut" class="btn btn-primary">로그아웃</span>
+                </span>
+              </li>
+            </template>
+            <template v-else>
+              <li class="nav-item">
+                <router-link to="/login" class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75">
+                  <span>LOGIN</span>
+                </router-link>
+              </li>
+            </template>
           </ul>
         </div>
       </div>
@@ -45,6 +59,11 @@
 import { storeToRefs } from 'pinia';
 import { useAppStore } from '@/stores/app';
 const appStore = useAppStore();
-const { showMenu, getNavbar } = storeToRefs(appStore);
-const { toggleNavbar } = appStore;
+const { showMenu, user } = storeToRefs(appStore);
+const { toggleNavbar, logOut } = appStore;
+
+const signOut = async () => {
+  logOut();
+  // router.push('/')
+};
 </script>
