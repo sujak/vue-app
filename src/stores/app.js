@@ -8,7 +8,8 @@ export const useAppStore = defineStore('app', () => {
   const showMenu = ref(false);
   const user = reactive({
     loggedIn: false,
-    data: null
+    data: null,
+    origin: null
   });
 
   // Getter
@@ -38,7 +39,11 @@ export const useAppStore = defineStore('app', () => {
   async function logIn({ email, password }) {
     const response = await signInWithEmailAndPassword(auth, email, password);
     if (response) {
-      user.data = response.user;
+      user.data = {
+        displayName: response.user.displayName,
+        email: response.user.email
+      };
+      user.origin = response.user;
     } else {
       throw new Error('login failed');
     }
@@ -46,17 +51,29 @@ export const useAppStore = defineStore('app', () => {
   async function logOut() {
     await signOut(auth);
     user.data = null;
+    user.origin = null;
   }
-  async function fetchUser(info) {
-    user.loggedIn = info !== null;
-    if (info) {
-      user.data = {
-        displayName: info.displayName,
-        email: info.email
-      };
-    } else {
-      user.data = null;
-    }
+  async function fetchUser() {
+    return new Promise((resolve, reject) => {
+      try {
+        auth.onAuthStateChanged((info) => {
+          user.loggedIn = info !== null;
+          if (info) {
+            user.data = {
+              displayName: info.displayName,
+              email: info.email,
+            };
+            user.origin = info;
+          } else {
+            user.data = null;
+            user.origin = null;
+          }
+          resolve();
+        });
+      } catch (err) {
+        reject(err);
+      }
+    });
   }
 
   return {

@@ -58,7 +58,7 @@
 
 <script setup>
 import { ref, reactive } from 'vue';
-import { storeToRefs } from 'pinia';
+import { useRouter } from 'vue-router';
 import { useAppStore } from '@/stores/app';
 
 const error = ref(null);
@@ -67,9 +67,8 @@ const form = reactive({
   password: '',
   rememberMe: false
 });
-
+const router = useRouter();
 const appStore = useAppStore();
-// const { user } = storeToRefs(appStore);
 const { logIn } = appStore;
 
 // const Register = async () => {
@@ -90,7 +89,7 @@ const handleSubmit = async () => {
   try {
     console.log('로그인 시작');
     await logIn({ ...form });
-    router.push('/')
+    router.push('/');
   } catch (err) {
     console.log('로그인 실패', err.message);
     error.value = err.message;
