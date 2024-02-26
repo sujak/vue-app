@@ -36,6 +36,7 @@
               </li>
               <li class="nav-item">
                 <span class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75">
+                  <span class="normal-case">{{ user.data.displayName }}({{ user.data.email }}) </span>
                   <span @click.prevent="signOut" class="btn btn-primary">로그아웃</span>
                 </span>
               </li>
@@ -56,14 +57,16 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useAppStore } from '@/stores/app';
 const appStore = useAppStore();
 const { showMenu, user } = storeToRefs(appStore);
 const { toggleNavbar, logOut } = appStore;
+const router = useRouter();
 
 const signOut = async () => {
-  logOut();
-  // router.push('/')
+  await logOut();
+  router.push('/');
 };
 </script>

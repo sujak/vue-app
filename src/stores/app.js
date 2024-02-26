@@ -1,6 +1,6 @@
 import { ref, reactive, computed } from 'vue';
 import { defineStore } from 'pinia';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from 'firebase/auth';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, signOut } from 'firebase/auth';
 import { auth } from '@/firebase.config.js';
 
 export const useAppStore = defineStore('app', () => {
@@ -30,8 +30,15 @@ export const useAppStore = defineStore('app', () => {
   async function register({ email, password, name }) {
     const response = await createUserWithEmailAndPassword(auth, email, password);
     if (response) {
-      user.data = response.user;
-      response.user.updateProfile({ displayName: name });
+      user.data = {
+        displayName: response.user.displayName,
+        email: response.user.email
+      };
+      user.origin = response.user;
+
+      await updateProfile(auth.currentUser, {
+        displayName: name
+      });
     } else {
       throw new Error('Unable to register user');
     }

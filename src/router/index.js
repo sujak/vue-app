@@ -1,3 +1,4 @@
+import { storeToRefs } from 'pinia';
 import { createWebHistory, createRouter } from 'vue-router';
 import { useAppStore } from '@/stores/app';
 
@@ -8,6 +9,8 @@ import DefaultLayout from '@/layouts/Default.vue';
 import Home from '@/views/Home.vue';
 import NotFound from '@/views/error/NotFound.vue';
 import Login from '@/views/auth/Login.vue';
+import SignUp from '@/views/auth/SignUp.vue';
+
 
 const routes = [
   {
@@ -31,7 +34,8 @@ const routes = [
     name: 'Demo',
     component: () => import('@/views/demo/Home.vue'),
     meta: {
-      layout: DefaultLayout
+      layout: DefaultLayout,
+      requiresAuth: true
     },
     children: [
       {
@@ -47,7 +51,18 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+    meta: {
+      layout: DefaultLayout
+    },
+  },
+  {
+    path: '/signup',
+    name: 'SignUp',
+    component: SignUp,
+    meta: {
+      layout: DefaultLayout
+    },
   },
   {
     path: '/notFound',
@@ -69,11 +84,29 @@ const router = createRouter({
 // Navigation guards
 router.beforeEach((to, from, next) => {
   const appStore = useAppStore();
-  const { hideNavbar } = appStore;
+  const { hideNavbar, getUser } = appStore;
+  const isAuthenticated = () => {
+    return getUser.loggedIn;
+  };
+
   // 이동시 네비게이션 숨기기
   hideNavbar();
 
-  next();
+  const guestOnlyPath = ['Login', 'SignUp'];
+
+  if (!isAuthenticated() && to.meta.requiresAuth) {
+    // 로그인 페이지로 이동
+    next({
+      path: '/login',
+      query: {
+        returnUrl: to.fullPath
+      }
+    });
+  } else if(isAuthenticated() && guestOnlyPath.some((name)=> name === to.name)){
+    next('/');
+  } else {
+    next();
+  }
 });
 // router.beforeResolve(async to => {})
 // router.afterEach((to, from, failure) => {});
