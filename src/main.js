@@ -1,16 +1,28 @@
 import { createApp } from 'vue';
-import { createPinia } from 'pinia';
 import App from './App.vue';
-import router from './router';
+
+// store
+import { setupStore } from '@/stores'
+
+// element-plus
+import { setupElementPlus } from '@/plugins/elementPlus'
+
+// router
+import { setupRouter } from '@/router';
+
 import { useAppStore } from './stores/app';
 
+
+import 'uno.css'
 import './assets/css/style.scss';
 
 (async () => {
   const app = createApp(App);
-  app.use(createPinia());
+
+  setupStore(app);
+  setupElementPlus(app);
   const { fetchUser } = useAppStore();
   await fetchUser();
-  app.use(router);
+  setupRouter(app);
   app.mount('#app');
 })();

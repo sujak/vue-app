@@ -1,83 +1,39 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  --login-bg-color: #293146;
+  --left-menu-max-width: 200px;
+  --left-menu-min-width: 64px;
+  --left-menu-bg-color: #001529;
+  --left-menu-bg-light-color: #0f2438;
+  --left-menu-bg-active-color: var(--el-color-primary);
+  --left-menu-text-color: #bfcbd9;
+  --left-menu-text-active-color: #fff;
+  --left-menu-collapse-bg-active-color: var(--el-color-primary);
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  --logo-height: 50px;
+  --logo-title-text-color: #fff;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  --top-header-bg-color: '#fff';
+  --top-header-text-color: 'inherit';
+  --top-header-hover-color: #f6f6f6;
+  --top-tool-height: var(--logo-height);
+  --top-tool-p-x: 0;
+  --tags-view-height: 35px;
 
-h1 {}
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
+  --tab-menu-max-width: 80px;
+  --tab-menu-min-width: 30px;
+  --tab-menu-collapse-height: 36px;
 
-body {
-  margin: 0;
-  // display: flex;
-  // place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  --app-content-padding: 20px;
+  --app-content-bg-color: #f5f7f9;
+  --app-footer-height: 50px;
+  --transition-time-02: 0.2s;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.dark {
+  --app-content-bg-color: var(--el-bg-color);
 }
+@import 'element-plus/theme-chalk/dark/css-vars.css';
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-.card {
-  padding: 2em;
-}
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.el-popup-parent--hidden {
+  width: 100% !important;
 }

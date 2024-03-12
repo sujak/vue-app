@@ -51,9 +51,12 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: Login,
+    // component: Login,
+    component: () => import('@/views/Login/Login.vue'),
     meta: {
-      layout: DefaultLayout
+      hidden: true,
+      title: '로그인',
+      noTagsView: true
     },
   },
   {
@@ -78,7 +81,8 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
+  routes,
+  scrollBehavior: () => ({ left: 0, top: 0 })
 });
 
 // Navigation guards
@@ -110,5 +114,8 @@ router.beforeEach((to, from, next) => {
 });
 // router.beforeResolve(async to => {})
 // router.afterEach((to, from, failure) => {});
+export const setupRouter = (app) => {
+  app.use(router)
+}
 
 export default router;

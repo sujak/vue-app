@@ -1,0 +1,17 @@
+
+$color-text-black: #000;
+$color-text-red: #f00;
+
+
+$font-wieght-regular: 400;
+$font-wieght-medium: 500;
+$font-wieght-bold: 700;
+
+
+$namespace: v;
+$elNamespace: el;
+
+:export {
+  namespace: $namespace;
+  elNamespace: $elNamespace;
+}

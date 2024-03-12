@@ -12,5 +12,17 @@
 <script setup>
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+html,
+body {
+  padding: 0 !important;
+  margin: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+#app {
+  width: 100%;
+  height: 100%;
+}
 </style>
